@@ -248,7 +248,8 @@ make -C boilerplate ci
 
 ### 1. Multi-Container Supervision
 
-![Picture1](Screenshots/Picture1.png)
+<img width="778" height="145" alt="image" src="https://github.com/user-attachments/assets/33cc61ab-19dc-4f9e-b4ac-e95de6e28cce" />
+
 
 *The supervisor process is running and managing multiple containers. The right panel shows `ps aux | grep engine` output — multiple container entries are visible under the single supervisor process, confirming concurrent multi-container management.*
 
