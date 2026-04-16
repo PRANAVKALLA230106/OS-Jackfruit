@@ -257,7 +257,8 @@ make -C boilerplate ci
 
 ### 2. Metadata Tracking
 
-![Picture2](Screenshots/Picture2.png)
+<img width="809" height="218" alt="image" src="https://github.com/user-attachments/assets/37c0133b-19df-4eaf-a1bd-9ca62e3495c0" />
+
 
 *Output of `engine ps` showing both `alpha` and `beta` containers in the `running` state with their host PIDs, soft limits (40 MiB), and hard limits (64 MiB) tracked in supervisor metadata.*
 
@@ -265,7 +266,8 @@ make -C boilerplate ci
 
 ### 3. Bounded-Buffer Logging
 
-![Picture3](Screenshots/Picture3.png)
+<img width="781" height="469" alt="image" src="https://github.com/user-attachments/assets/9758ce51-fc57-4e50-a608-ef89acf59e12" />
+
 
 *Output of `engine logs alpha` — container stdout/stderr captured through pipes into the supervisor's bounded-buffer logging pipeline and written to a persistent per-container log file. Each line of output was routed through the producer-consumer buffer.*
 
@@ -273,7 +275,8 @@ make -C boilerplate ci
 
 ### 4. CLI and IPC
 
-![Picture4](Screenshots/Picture4.png)
+<img width="776" height="184" alt="image" src="https://github.com/user-attachments/assets/ae13b06c-c345-4dc1-b8b8-c818bc045905" />
+
 
 *A `stop alpha` command is issued from the CLI client, which sends a request over the UNIX domain socket IPC control channel to the supervisor. The follow-up `engine ps` confirms the supervisor updated the `alpha` container state to `stopped` while `beta` continues running — demonstrating the control IPC path.*
 
@@ -281,7 +284,8 @@ make -C boilerplate ci
 
 ### 5. Soft-Limit Warning
 
-![Picture5](Screenshots/Picture5.png)
+<img width="781" height="314" alt="image" src="https://github.com/user-attachments/assets/3b643082-5a76-47b0-a62a-4c5a5fedb8ca" />
+
 
 *`dmesg` output showing the kernel module emitting `SOFT LIMIT` warning events for containers (`memtest3`, `memtest4`) that crossed their soft memory threshold. The warnings are logged once per container and visible in the kernel ring buffer.*
 
@@ -289,7 +293,8 @@ make -C boilerplate ci
 
 ### 6. Hard-Limit Enforcement
 
-![Picture6](Screenshots/Picture6.png)
+<img width="808" height="170" alt="image" src="https://github.com/user-attachments/assets/7813f6f2-9820-4998-b114-ca3abbcf74f7" />
+
 
 *`engine ps` output after memory-intensive workloads exceeded their hard limits. Containers `memtest3` and `memtest4` show state `hard_limit_killed` — confirming the kernel module sent `SIGKILL` and the supervisor correctly classified the termination reason in metadata.*
 
@@ -297,15 +302,16 @@ make -C boilerplate ci
 
 ### 7. Scheduling Experiment
 
-![Picture7](Screenshots/Picture7.png)
+<img width="748" height="448" alt="image" src="https://github.com/user-attachments/assets/561c8e87-ee97-49eb-b814-ef6f395400d2" />
+
 
 *`top` output during a concurrent scheduling experiment. The `fast` container (nice = −5) shows ~99.4% CPU usage while the `slow` container (nice = 10) shows ~99.1% but receives lower scheduling priority. The I/O-bound process (`seed`, PID 2341) remains at ~4% CPU, demonstrating CFS responsiveness to I/O-heavy workloads.*
 
 ---
 
 ### 8. Clean Teardown
+<img width="775" height="338" alt="image" src="https://github.com/user-attachments/assets/02ecf99a-efe2-4d5e-bad0-bfa716db6856" />
 
-![Picture8](Screenshots/Picture8.png)
 
 *After stopping all containers, `engine ps` shows all containers in their final states (`stopped`, `hard_limit_killed`, `exited`). The `ps aux | grep defunct` command confirms zero zombie processes remain — all children were correctly reaped by the supervisor and all logging threads exited cleanly.*
 
